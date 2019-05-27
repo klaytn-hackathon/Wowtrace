@@ -1,0 +1,10 @@
+{
+    "PRIVATE_KEY": "0x573a762e823f62a286aef9b417d76d4884c756a45102ffa6873f8616981310bd",
+    "ROPSTEN_KEY": "https://ropsten.infura.io/v3/6b8d5e541fb54d5f84dd5632e39b49cd",
+    "RINKEBY_KEY": "https://rinkeby.infura.io/v3/6b8d5e541fb54d5f84dd5632e39b49cd",
+    "SC_ADDRESS": "0xcdedefbb1141f68f8f0f5bb678543e139d3911bc",
+    "BACKEND_API": "http://0.0.0.0:8000/api/v1",
+    "ROPSTEN_ETHER_SCAN": "https://ropsten.etherscan.io",
+    "RINKEBY_ETHER_SCAN": "https://rinkeby.etherscan.io",
+    "KLAYTN_ETHER_SCAN": "https://baobab.klaytnscope.com"
+}

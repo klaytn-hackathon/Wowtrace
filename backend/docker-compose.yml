@@ -1,0 +1,81 @@
+version: "3.1"
+services:
+  # pm2:
+  #   build: ./docker
+  #   restart: always
+  #   container_name: wow-pm2
+  #   volumes:
+  #     - .:/src
+  #   working_dir: /src
+  #   ports:
+  #     - 8000:8000
+  #   command: [ "pm2-runtime", "start", "pm2.json" ]
+
+  postgres:
+    image: postgres:10
+    restart: always
+    container_name: wow-postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/pgdata
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: c9BqhGZM5v7EPTs7
+      POSTGRES_DB: hackathon
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    container_name: wow-adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  zookeeper:
+    image: zookeeper
+    restart: always
+    # network_mode: host
+    container_name: wow-zookeeper
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=localhost:2888:3888
+    volumes:
+      - ./docker/zookeeper/conf:/conf
+      - ./docker/zookeeper/data:/data
+      - ./docker/zookeeper/datalog:/datalog
+      - ./docker/zookeeper/logs:/logs
+    extra_hosts:
+      - "moby:127.0.0.1"
+      - "localhost: 127.0.0.1"
+
+  kafka:
+    image: wurstmeister/kafka
+    restart: always
+    # network_mode: host
+    container_name: wow-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CONTROLLER_SHUTDOWN_ENABLE: 'true'
+      KAFKA_AUTO_LEADER_REBALANCE_ENABLE: 'false'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/kafka:/kafka
+    extra_hosts:
+      - "moby:127.0.0.1"
+      - "localhost: 127.0.0.1"
+
+volumes:
+  postgres-data:

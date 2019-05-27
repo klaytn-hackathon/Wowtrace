@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 2400px;
+        }
+
+        .stamp-frame {
+            /* background: url({{ publicUrl + assetsUrl('stamps/Fruitchain-Stamp-no-qr-code.svg') }}) no-repeat; */
+            width: 350px;
+            height: 250px;
+            background-position: top left;
+            background-size: contain;
+            margin: 0 0 40px 0;
+            text-align: center;
+            display: block;
+            float: left;
+            position: relative;
+        }
+
+        .stamp-frame .stamp-info {
+            position: absolute;
+            top: 48px;
+            left: 50%;
+            margin-left: -70px;
+        }
+
+        .stamp-frame .stamp-info img {
+            display: inline-block;
+        }
+
+        .stamp-frame .stamp-sn {
+            font-size: 12px;
+        }
+
+        .stamp-no {
+            font-size: 20px !important;
+            margin-top: 40px;
+        }
+
+        .page {
+            clear: both;
+            margin: 50px auto 0 auto;
+            font-size: 30px;
+            width: 100px;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        @each(stamp in stamps)
+        <div class="stamp-frame">
+            <div class="stamp-info">
+                <div class="stamp-sn">SN: {{ stamp.sn }}</div>
+                <img src="{{ stamp.src }}" />
+                <div class="stamp-no">{{ ($loop.index + startNumber) }}</div>
+            </div>
+        </div>
+        @endeach
+        <div style="clear: both;"></div>
+        <div class="page">Page {{ pageNumber }}</div>
+    </div>
+</body>
+
+</html>

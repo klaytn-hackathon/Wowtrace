@@ -1,0 +1,12 @@
+node_modules
+.env
+package-lock.json
+
+resources/stamps
+
+public/archives
+
+kafka
+
+docker/zookeeper/data*
+docker/zookeeper/logs
