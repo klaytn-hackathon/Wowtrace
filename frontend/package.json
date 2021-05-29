@@ -19,7 +19,7 @@
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "truffle-hdwallet-provider": "^1.0.5",
-    "ws": "^7.0.0"
+    "ws": "^7.4.6"
   },
   "scripts": {
     "start": "react-scripts start && node-sass src/stylesheet/scss/main.scss src/stylesheet/style/styles.css -w",
